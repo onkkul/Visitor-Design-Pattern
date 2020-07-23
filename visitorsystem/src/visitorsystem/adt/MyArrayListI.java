@@ -25,4 +25,8 @@ public interface MyArrayListI extends Element{
         throws ArrayIndexOutOfBoundsException;
 
     public int getSize();
+
+    public String toString();
+
+    public void finalize();
 }

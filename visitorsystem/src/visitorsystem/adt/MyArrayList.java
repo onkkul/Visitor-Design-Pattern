@@ -28,10 +28,23 @@ public class MyArrayList implements MyArrayListI{
     private ArrayList<MyArrayI> listOfArrays = new ArrayList<MyArrayI>();
     private int size = 2;
 
+    /**  Constructor for MyArrayList
+     *
+     * @exception None
+     *
+     * @return void
+     */
     public void MyArrayList(){
         this.listOfArrays.ensureCapacity(size);
     }
 
+
+    /**  Get the array in the list
+     *
+     * @exception ArrayIndexOutOfBoundsException when provided index is out of range
+     *
+     * @return MyArrayI the array in the list
+     */
     @Override
     public  MyArrayI getMyArray(int index)
         throws ArrayIndexOutOfBoundsException{
@@ -41,6 +54,12 @@ public class MyArrayList implements MyArrayListI{
                 throw new ArrayIndexOutOfBoundsException("Invalid index for list of size 2");
     }
 
+    /**  Store the array in the list at an index
+     *
+     * @exception ArrayIndexOutOfBoundsException when provided index is out of range
+     *
+     * @return MyArrayI the array in the list
+     */
     @Override
     public void setMyArray(int index, MyArrayI myArray)
         throws ArrayIndexOutOfBoundsException{
@@ -51,22 +70,57 @@ public class MyArrayList implements MyArrayListI{
     }
 
 
+    /** Apped the array in the list
+     *
+     * @exception ArrayIndexOutOfBoundsException when arrayList size is out of limits
+     *
+     * @return MyArrayI the array in the list
+     */
     @Override
     public void insert(MyArrayI myArray)
         throws ArrayIndexOutOfBoundsException{
-            if (this.listOfArrays.size() < 2)
+            if (this.listOfArrays.size() < this.size)
                 this.listOfArrays.add(myArray);
             else
                 throw new ArrayIndexOutOfBoundsException("Invalid index for list of size 2");
     }
 
-    @Override
-    public void accept(VisitorI visitor){
-        visitor.visit(this);
-    }
 
+    /**  Accept the visitor for MyArrayList
+     *
+     * @exception None
+     *
+     * @return void
+     */
     @Override
-    public int getSize(){
-        return this.size;
-    }
+    public void accept(VisitorI visitor)    {   visitor.visit(this);    }
+
+
+    /**  Return the size of MyArrayList
+     *
+     * @exception None
+     *
+     * @return int
+     */
+    @Override
+    public int getSize()                    {   return this.size;       }
+
+
+    /**  toString method for debugging.
+     *
+     * @exception None
+     *
+     * @return String
+     */
+    @Override
+    public String toString()                {   return "";              }
+
+    /** Empty finalize method
+     *
+     * @exception None
+     *
+     * @return void
+     */
+    @Override
+    public void finalize()                  {   return;                 }
 }

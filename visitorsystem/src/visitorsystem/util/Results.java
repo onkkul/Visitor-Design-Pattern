@@ -17,13 +17,12 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface{
     private BufferedWriter outputWriter1;
     private BufferedWriter outputWriter2;
 
-    /**
-    * Constructor for Results class, initializes empty output file
-    * 
-    * @exception IOException
-    *
-    * @return void
-    */
+    /** Constructor for Results class, initializes empty output file
+     * 
+     * @exception IOException
+     *
+     * @return void
+     */
     public Results(String outputFile1, String outputFile2){
         try {
             
@@ -51,13 +50,12 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface{
     }
 
 
-    /**
-    * Stores each single line for later persistance.
-    * 
-    * @exception None
-    *
-    * @return void
-    */
+    /** Stores each single line for later persistance.
+     * 
+     * @exception None
+     *
+     * @return void
+     */
     public void writeLine(String line, String file){
         if (file == "common")
             this.commonLine = this.commonLine + line + "\n";
@@ -66,22 +64,12 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface{
         }
     }
 
-
-    /**
-    * Helper function to writeResult.
-    *
-    * @exception None
-    *
-    * @return void
-    */
-
-    /**
-    * Writes results in the output file
-    * 
-    * @exception IOException
-    *
-    * @return void
-    */
+    /** Writes results in the commonintsout.txt file
+     * 
+     * @exception IOException
+     *
+     * @return
+     */
     @Override
     public void writeCommonIntsFile(){
         try{
@@ -95,18 +83,24 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface{
         }
         return;
     }
+
+    /** Writes common results to the display
+     * 
+     * @exception None
+     *
+     * @return void
+     */
     @Override
     public void displayCommonIntsFile(){
         System.out.println(this.commonLine);
     }
 
-    /**
-    * Writes results in the output file
-    * 
-    * @exception IOException
-    *
-    * @return void
-    */
+    /** Writes results in the missingintsout.txt file
+     * 
+     * @exception IOException
+     *
+     * @return
+     */
     @Override
     public void writeMissingIntsFile(){
         try{
@@ -121,11 +115,23 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface{
         return;
     }
 
+    /** Writes missing results to display
+     * 
+     * @exception IOException
+     *
+     * @return
+     */
     @Override
     public void displayMissingIntsFile(){
         System.out.println(this.missingLine);
     }
 
+    /** Wrapper function to write results
+     * 
+     * @exception None
+     *
+     * @return void
+     */
     public void persistResult(){
         this.commonLine = this.commonLine.replace("null", "");
         this.missingLine = this.missingLine.replace("null", "");

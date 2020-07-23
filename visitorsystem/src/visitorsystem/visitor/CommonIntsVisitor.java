@@ -22,13 +22,16 @@ import visitorsystem.visitor.PopulateMyArrayVisitor;
 public class CommonIntsVisitor implements VisitorI{
 
     private MyArrayI temp = null;
+    private Results result = null;
     private MyArrayListI arrayList = null;
-
-    // private ArrayList<ArrayList<Integer>> bothArrays = new ArrayList<ArrayList<Integer>>();
     private ArrayList<Integer> commonInts = new ArrayList<Integer>();
 
-    private Results result = null;
-
+    /** Constructor for CommonIntsVisitor 
+     *  stores the result and arrayList instance
+     * @exception None
+     *
+     * @return Void
+     */
     public CommonIntsVisitor(MyArrayListI arrayList, Results result){
         this.arrayList = arrayList;
         this.result = result;
@@ -36,6 +39,12 @@ public class CommonIntsVisitor implements VisitorI{
     }
 
 
+    /** Sort and Filter list for repeatations.
+     * 
+     * @exception None
+     *
+     * @return ArrayList<Integer> 
+     */
     public ArrayList<Integer> filter(MyArrayI myArray){
         int index = 1;
         ArrayList<Integer> list = new ArrayList<Integer>();
@@ -52,6 +61,12 @@ public class CommonIntsVisitor implements VisitorI{
     }
 
 
+    /** Find the common ints in given Array
+     * 
+     * @exception None
+     *
+     * @return Void
+     */
     public void union(ArrayList<Integer> list1, ArrayList<Integer> list2){
         result.writeLine("------ Comman Values in Both Files ------", "common");
         for (Integer element : list2){
@@ -62,6 +77,12 @@ public class CommonIntsVisitor implements VisitorI{
         }
     }
 
+    /** Visit method to visit ArrayList
+     * 
+     * @exception None
+     *
+     * @return Void
+     */
     @Override
     public void visit(MyArrayListI listOfArrays){
 
@@ -71,12 +92,24 @@ public class CommonIntsVisitor implements VisitorI{
         union(list1, list2);
     }
 
+    /** toString() method for CommonIntsVisitor
+     *
+     * @exception None
+     *
+     * @return String of missing inputs
+     */
     @Override
     public String toString(){
         return commonInts.toString();
     }
 
 
+    /** Empty Visitor method to visit MyArrayI
+     * 
+     * @exception None
+     *
+     * @return Void
+     */
     @Override
     public void visit(MyArrayI arrayToVisit)    {   return;             }
 }

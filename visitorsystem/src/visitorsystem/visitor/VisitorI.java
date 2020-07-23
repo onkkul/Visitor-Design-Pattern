@@ -19,10 +19,6 @@ import visitorsystem.visitor.PopulateMyArrayVisitor;
 
 public interface VisitorI{
 
-    // public void setFileName(String fileName);
-
-    // public String getFileName();
-
     public void visit(MyArrayI array);
 
     public void visit(MyArrayListI arrayList);

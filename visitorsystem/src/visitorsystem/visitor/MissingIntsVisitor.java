@@ -27,21 +27,45 @@ public class MissingIntsVisitor implements VisitorI{
     private MyArrayI array = null;
     private ArrayList<Integer> missingInts = new ArrayList<Integer>();
 
-
+    /** Empty COnstructor for MissingIntsVisitor
+     * 
+     * @exception None
+     *
+     * @return Void
+     */
     public MissingIntsVisitor(Results result){
         this.result = result;
 
     }
 
+    /** Method to get the MyArrayI object to visit
+     * 
+     * @exception None
+     *
+     * @return Void
+     */
     public void setArray(MyArrayI array, int i){
         result.writeLine("------ Missing Values in File " + i + " ------", "missing");
         this.array = array;
         this.array.accept(this);
     }
+
+    /** Method to get the MyArrayI object
+     * 
+     * @exception None
+     *
+     * @return MyArrayI
+     */
     public MyArrayI getArray(){
         return this.array;
     }
 
+    /** Sort and Filter list for repeatations.
+     * 
+     * @exception None
+     *
+     * @return ArrayList<Integer> 
+     */
     public ArrayList<Integer> filter(MyArrayI myArray){
         int index = 1;
         ArrayList<Integer> list = new ArrayList<Integer>();
@@ -57,6 +81,12 @@ public class MissingIntsVisitor implements VisitorI{
         return list;
     }
 
+    /** Find the missing ints in given Array
+     * 
+     * @exception None
+     *
+     * @return Void
+     */
     public void findMissing(ArrayList<Integer> list){
         
         for (int element = 0; element < 99; element++){
@@ -68,15 +98,49 @@ public class MissingIntsVisitor implements VisitorI{
     }
 
 
+    /** Visit method to visit given Array
+     * 
+     * @exception None
+     *
+     * @return Void
+     */
     @Override
     public void visit(MyArrayI arrayToVisit){
         ArrayList<Integer> list = filter(arrayToVisit);
         findMissing(list);
     }
 
-    @Override
-    public String toString()                    {   return "";     }
 
+    /** Empty Visitor method to visit MyArrayList
+     * 
+     * @exception None
+     *
+     * @return Void
+     */
     @Override
-    public void visit(MyArrayListI listOfArrays){   return;    }
+    public void visit(MyArrayListI listOfArrays){
+        return;    
+    }
+
+
+    /** toString() method for MissingIntsVisitor
+     *
+     * @exception None
+     *
+     * @return String of missing inputs
+     */
+    @Override
+    public String toString(){
+       return missingInts.toString();     }
+
+
+    /** Empty finalize method
+     *
+     * @exception None
+     *
+     * @return void
+     */
+    public void finalize(){
+        return;
+    }
 }
