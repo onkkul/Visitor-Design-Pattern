@@ -22,13 +22,13 @@ public final class FileProcessor {
 	private BufferedReader reader;
 
 	/**
-	* Constructs a FileProcessor that can stream the contents of the provided input file
-	* 	line by line.
-	* @exception InvalidPathException On invalid path string.
-	* @exception SecurityException On not having necessary read permissions to the input file.
-	* @exception FileNotFoundException On input file not found.
-	* @exception IOException On any I/O errors while reading lines from input file.
-	*/
+	 * Constructs a FileProcessor that can stream the contents of the 
+	 * provided input file line by line.
+	 * @exception InvalidPathException On invalid path string.
+	 * @exception SecurityException On not having necessary read permissions to the input file.
+	 * @exception FileNotFoundException On input file not found.
+	 * @exception IOException On any I/O errors while reading lines from input file.
+	 */
 	public FileProcessor(String inputFilePath)
 		throws InvalidPathException, SecurityException, 
 			FileNotFoundException, IOException{
@@ -46,27 +46,21 @@ public final class FileProcessor {
         reader = new BufferedReader(new FileReader(fileToRead));
 	}
 
-
-	// public void setInputFile(String inputFilePath)
-	// 	throws InvalidPathException, SecurityException, 
-	// 		FileNotFoundException, IOException {
-	// }
-
 	/**
-	* Retrieves and returns the next line in the input file.
-	*
-	* @return String The next line read from the input file.
-	* @exception IOException On error encountered when reading from input file.
-	*/
+	 * Retrieves and returns the next line in the input file.
+	 *
+	 * @return String The next line read from the input file.
+	 * @exception IOException On error encountered when reading from input file.
+	 */
 	public String poll() throws IOException {
 		return reader.readLine();
 	}
 
 	/**
-	* Close the buffered reader instance.
-	*
-	* @exception IOException On error encountered when closing the buffered reader.
-	*/
+	 * Close the buffered reader instance.
+	 *
+	 * @exception IOException On error encountered when closing the buffered reader.
+	 */
 	public void close() throws IOException {
 		reader.close();
 	}

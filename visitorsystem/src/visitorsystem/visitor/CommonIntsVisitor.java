@@ -92,6 +92,18 @@ public class CommonIntsVisitor implements VisitorI{
         union(list1, list2);
     }
 
+
+
+    /** Empty Visitor method to visit MyArrayI
+     * 
+     * @exception None
+     *
+     * @return Void
+     */
+    @Override
+    public void visit(MyArrayI arrayToVisit)    {   return;             }
+
+
     /** toString() method for CommonIntsVisitor
      *
      * @exception None
@@ -103,13 +115,14 @@ public class CommonIntsVisitor implements VisitorI{
         return commonInts.toString();
     }
 
-
-    /** Empty Visitor method to visit MyArrayI
-     * 
+    /** Empty finalize method
+     *
      * @exception None
      *
-     * @return Void
+     * @return void
      */
-    @Override
-    public void visit(MyArrayI arrayToVisit)    {   return;             }
+    public void finalize(){
+        return;
+    }
+
 }

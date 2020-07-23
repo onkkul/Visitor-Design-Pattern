@@ -93,7 +93,9 @@ public class MyArrayList implements MyArrayListI{
      * @return void
      */
     @Override
-    public void accept(VisitorI visitor)    {   visitor.visit(this);    }
+    public void accept(VisitorI visitor){
+        visitor.visit(this);    
+    }
 
 
     /**  Return the size of MyArrayList
@@ -103,7 +105,9 @@ public class MyArrayList implements MyArrayListI{
      * @return int
      */
     @Override
-    public int getSize()                    {   return this.size;       }
+    public int getSize(){   
+        return this.size;       
+    }
 
 
     /**  toString method for debugging.
@@ -113,7 +117,9 @@ public class MyArrayList implements MyArrayListI{
      * @return String
      */
     @Override
-    public String toString()                {   return "";              }
+    public String toString(){
+        return "";
+    }
 
     /** Empty finalize method
      *
@@ -122,5 +128,7 @@ public class MyArrayList implements MyArrayListI{
      * @return void
      */
     @Override
-    public void finalize()                  {   return;                 }
+    public void finalize(){   
+        return;                 
+    }
 }

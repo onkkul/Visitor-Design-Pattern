@@ -27,7 +27,7 @@ public class MissingIntsVisitor implements VisitorI{
     private MyArrayI array = null;
     private ArrayList<Integer> missingInts = new ArrayList<Integer>();
 
-    /** Empty COnstructor for MissingIntsVisitor
+    /** Constructor for MissingIntsVisitor
      * 
      * @exception None
      *

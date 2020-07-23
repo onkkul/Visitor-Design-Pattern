@@ -38,10 +38,9 @@ public class Driver {
     public static String[] fileNames;
 
 
-    /*
-     * As the build.xml specifies the arguments as input,output or metrics, in case the
-     * argument value is not given java takes the default value specified in
-     * build.xml. To avoid that, below condition is used
+    /** Method to validate the command line args
+     * @exception None
+     * @return void
      */
     private static void validateInputs(String[] args){
 
@@ -63,13 +62,17 @@ public class Driver {
     }
 
 
+    /** Method to perform the tasks
+     * @exception None
+     * @return void
+     */
 	private static void executeProcess(String[] fileNames){
         try {
             Results result = new Results(fileNames[2], fileNames[3]);
             MyArrayListI listOfArrays = new MyArrayList();
 
             PopulateMyArrayVisitor arrayPopulator = new PopulateMyArrayVisitor(listOfArrays);
-            
+
             arrayPopulator.setFileName(fileNames[0]);
             arrayPopulator.populateArray();
             arrayPopulator.setFileName(fileNames[1]);
@@ -94,6 +97,10 @@ public class Driver {
     }
 
 
+    /** Main method to of driver code
+     * @exception None
+     * @return void
+     */
 	public static void main(String[] args) throws Exception {
 
         validateInputs(args);
