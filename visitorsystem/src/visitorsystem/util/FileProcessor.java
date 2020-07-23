@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.InvalidPathException;
 
+
 /**
 * FileProcessor is a utility to be used to read in the contents of the input file.
 *
@@ -28,12 +29,9 @@ public final class FileProcessor {
 	* @exception FileNotFoundException On input file not found.
 	* @exception IOException On any I/O errors while reading lines from input file.
 	*/
-	public FileProcessor(){	}
-
-
-	public void setInputFile(String inputFilePath)
+	public FileProcessor(String inputFilePath)
 		throws InvalidPathException, SecurityException, 
-			FileNotFoundException, IOException {
+			FileNotFoundException, IOException{
 
 		if (!Files.exists(Paths.get(inputFilePath))) {
 			throw new FileNotFoundException("invalid input file or input file in incorrect location");
@@ -46,8 +44,13 @@ public final class FileProcessor {
         }
 
         reader = new BufferedReader(new FileReader(fileToRead));
-
 	}
+
+
+	// public void setInputFile(String inputFilePath)
+	// 	throws InvalidPathException, SecurityException, 
+	// 		FileNotFoundException, IOException {
+	// }
 
 	/**
 	* Retrieves and returns the next line in the input file.

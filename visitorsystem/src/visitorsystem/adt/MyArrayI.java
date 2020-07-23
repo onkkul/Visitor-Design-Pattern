@@ -3,7 +3,17 @@ package visitorsystem.adt;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public interface MyArrayI{
+import visitorsystem.util.Results;
+import visitorsystem.util.FileProcessor;
+
+import visitorsystem.adt.MyArray;
+import visitorsystem.adt.MyArrayI;
+import visitorsystem.adt.MyArrayList;
+import visitorsystem.adt.MyArrayListI;
+
+import visitorsystem.visitor.VisitorI;
+
+public interface MyArrayI extends Element{
 
     // Methods related to size
     public int getSize();
@@ -21,14 +31,14 @@ public interface MyArrayI{
     // Methods related to Element
     public boolean isMember(int element);
     public int getIndexOf(int element)
-        throws DataException;
+        throws IllegalArgumentException;
     public void removeElement(int element);
 
     // Insertion
     public void insert(int index, int element);
 
     // Cloneing methods
-    public ArrayList<Integer> getArray();
+    public ArrayList<Integer> getElements();
     public void setArray(ArrayList<Integer> inputArray);
     public MyArrayI clone();
 

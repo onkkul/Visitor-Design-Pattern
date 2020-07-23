@@ -1,23 +1,31 @@
 package visitorsystem.driver;
 
+import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.List;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.BufferedWriter;
 import java.io.PrintWriter;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.nio.file.InvalidPathException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 
-import visitorsystem.util.FileProcessor;
 import visitorsystem.util.Results;
+import visitorsystem.util.FileProcessor;
+
+import visitorsystem.adt.MyArray;
+import visitorsystem.adt.MyArrayI;
+import visitorsystem.adt.MyArrayList;
+import visitorsystem.adt.MyArrayListI;
+
+import visitorsystem.visitor.VisitorI;
+import visitorsystem.visitor.CommonIntsVisitor;
+import visitorsystem.visitor.MissingIntsVisitor;
+import visitorsystem.visitor.PopulateMyArrayVisitor;
 
 
 /**
@@ -35,13 +43,12 @@ public class Driver {
      * argument value is not given java takes the default value specified in
      * build.xml. To avoid that, below condition is used
      */
-    private static void validateInputs(String[] fileNames){
+    private static void validateInputs(String[] args){
 
         String[] defaults = {"input1", "input2", "commonintsout", "missingintsout", "debug"};
         
         if (args.length != REQUIRED_ARGS) {
-            System.err.printf("Error: Incorrect number of arguments."
-                "Program accepts %d arguments.", REQUIRED_ARGS);
+            System.err.printf("Error: Incorrect number of arguments. Program accepts %d arguments.", REQUIRED_ARGS);
             System.exit(0);
         }
         
@@ -58,19 +65,28 @@ public class Driver {
 
 	private static void executeProcess(String[] fileNames){
         try {
-            Results[] result = new Results(fileNames[2], fileNames[3]);
+            Results result = new Results(fileNames[2], fileNames[3]);
             MyArrayListI listOfArrays = new MyArrayList();
 
-            MyArrayI firstArray = new MyArray();
-            FileProcessor firstFileProcessor = new FileProcessor();
-            PopulateMyArrayVisitor firstArrayPopulator = new PopulateMyArrayVisitor(fileNames[0], firstFileProcessor, firstArray)
+            PopulateMyArrayVisitor arrayPopulator = new PopulateMyArrayVisitor(listOfArrays);
+            
+            arrayPopulator.setFileName(fileNames[0]);
+            arrayPopulator.populateArray();
+            arrayPopulator.setFileName(fileNames[1]);
+            arrayPopulator.populateArray();
 
-            MyArrayI secondArray = new MyArray();
-            FileProcessor secondFileProcessor = new FileProcessor();
-            PopulateMyArrayVisitor secondArrayPopulator = new PopulateMyArrayVisitor(fileNames[1], firstFileProcessor, secondArray);
+            listOfArrays = arrayPopulator.getListOfArrays();
 
-            listOfArrays.setMyArray(0, firstArray);
-            listOfArrays.setMyArray(1, firstArray);
+            CommonIntsVisitor commonIntsFinder = new CommonIntsVisitor(listOfArrays, result);
+
+            MissingIntsVisitor missingIntsFinder = new MissingIntsVisitor(result);
+            
+            for(int i = 0; i < listOfArrays.getSize(); i++){
+                MyArrayI temp = listOfArrays.getMyArray(i);
+                missingIntsFinder.setArray(temp, i+1);
+            }
+
+            result.persistResult();
         }
         catch(Exception e){
             e.printStackTrace();

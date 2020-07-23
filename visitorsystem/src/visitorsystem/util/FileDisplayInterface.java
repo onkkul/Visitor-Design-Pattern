@@ -2,5 +2,6 @@ package visitorsystem.util;
 
 
 public interface FileDisplayInterface {
-    public void writeFile();
+    public void writeCommonIntsFile();
+    public void writeMissingIntsFile();
 }

@@ -8,13 +8,14 @@ import java.io.IOException;
 import java.nio.file.InvalidPathException;
 
 
-public class Results implements FileDisplayInterface {
+public class Results implements FileDisplayInterface, StdoutDisplayInterface{
 
     private File outputFile1;
     private File outputFile2;
     private String commonLine;
     private String missingLine;
-    private BufferedWriter outputWriter;
+    private BufferedWriter outputWriter1;
+    private BufferedWriter outputWriter2;
 
     /**
     * Constructor for Results class, initializes empty output file
@@ -23,7 +24,7 @@ public class Results implements FileDisplayInterface {
     *
     * @return void
     */
-    public Results(String outputFile1 String outputFile2){
+    public Results(String outputFile1, String outputFile2){
         try {
             
             this.outputFile1 = new File(outputFile1);
@@ -59,9 +60,10 @@ public class Results implements FileDisplayInterface {
     */
     public void writeLine(String line, String file){
         if (file == "common")
-            this.commonLine = this.commonLine + line;
-        if (file == "missing")
-            this.missingLine = this.missingLine + line;
+            this.commonLine = this.commonLine + line + "\n";
+        if (file == "missing"){
+            this.missingLine = this.missingLine + line + "\n";
+        }
     }
 
 
@@ -72,13 +74,6 @@ public class Results implements FileDisplayInterface {
     *
     * @return void
     */
-    public void persistResult(String file){
-        if (file == "common")
-            this.commonLine = this.commonLine.replace("null", "");
-        else
-            this.missingLine = this.missingLine.replace("null", "");
-    }
-
 
     /**
     * Writes results in the output file
@@ -89,11 +84,10 @@ public class Results implements FileDisplayInterface {
     */
     @Override
     public void writeCommonIntsFile(){
-        persistResult("common");
         try{
-            this.outputWriter = new BufferedWriter(new FileWriter(this.outputFile1, true));
-            this.outputWriter.write(this.commonLine);
-            this.outputWriter.close();
+            this.outputWriter1 = new BufferedWriter(new FileWriter(this.outputFile1, true));
+            this.outputWriter1.write(this.commonLine);
+            this.outputWriter1.close();
         }
 
         catch(IOException failedToWriteFile){
@@ -101,7 +95,10 @@ public class Results implements FileDisplayInterface {
         }
         return;
     }
-    
+    @Override
+    public void displayCommonIntsFile(){
+        System.out.println(this.commonLine);
+    }
 
     /**
     * Writes results in the output file
@@ -112,16 +109,31 @@ public class Results implements FileDisplayInterface {
     */
     @Override
     public void writeMissingIntsFile(){
-        persistResult("missing");
         try{
-            this.outputWriter = new BufferedWriter(new FileWriter(this.outputFile2, true));
-            this.outputWriter.write(this.missingLine);
-            this.outputWriter.close();
+            this.outputWriter2 = new BufferedWriter(new FileWriter(this.outputFile2, true));
+            this.outputWriter2.write(this.missingLine);
+            this.outputWriter2.close();
         }
 
         catch(IOException failedToWriteFile){
             failedToWriteFile.printStackTrace();
         }
         return;
+    }
+
+    @Override
+    public void displayMissingIntsFile(){
+        System.out.println(this.missingLine);
+    }
+
+    public void persistResult(){
+        this.commonLine = this.commonLine.replace("null", "");
+        this.missingLine = this.missingLine.replace("null", "");
+
+        writeCommonIntsFile();
+        displayCommonIntsFile();
+        
+        displayMissingIntsFile();
+        writeMissingIntsFile();
     }
 }
